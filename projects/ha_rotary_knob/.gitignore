@@ -1,0 +1,6 @@
+# Build output and downloaded components
+build/
+managed_components/
+# sdkconfig holds your Wi-Fi password and Home Assistant token - never commit it
+sdkconfig
+sdkconfig.old

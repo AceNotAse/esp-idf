@@ -1,0 +1,144 @@
+menu "HA Rotary Knob"
+
+    menu "Wi-Fi"
+        config KNOB_WIFI_SSID
+            string "Wi-Fi network name (SSID)"
+            default "myssid"
+            help
+                Name of the 2.4 GHz Wi-Fi network the knob joins. The ESP32-S3 cannot use 5 GHz.
+
+        config KNOB_WIFI_PASSWORD
+            string "Wi-Fi password"
+            default "mypassword"
+    endmenu
+
+    menu "Home Assistant"
+        config KNOB_HA_URL
+            string "Home Assistant URL"
+            default "http://homeassistant.local:8123"
+            help
+                Base URL of your Home Assistant, without a trailing slash.
+                Examples: http://192.168.1.50:8123 or https://myhome.duckdns.org
+                Using the IP address is more reliable than the .local name.
+
+        config KNOB_HA_TOKEN
+            string "Long-lived access token"
+            default ""
+            help
+                Create one in Home Assistant: click your profile (bottom left) ->
+                Security tab -> Long-lived access tokens -> Create token.
+
+        config KNOB_HA_ENTITIES
+            string "Entities to control (comma separated)"
+            default "light.living_room,switch.coffee_maker,media_player.kitchen,climate.thermostat"
+            help
+                Entity IDs to show on the knob, in order. Find them in Home Assistant under
+                Settings -> Devices & services -> Entities. Supported domains:
+                light, switch, input_boolean, fan, cover, media_player, climate, lock,
+                scene, script. Up to 16 entities.
+
+        config KNOB_HA_POLL_MS
+            int "State refresh interval (ms)"
+            default 3000
+            range 1000 60000
+            help
+                How often the knob asks Home Assistant for the current state of every entity,
+                so changes made from the app or a wall switch show up on the screen.
+    endmenu
+
+    menu "Behaviour"
+        config KNOB_SCREEN_TIMEOUT_S
+            int "Turn screen off after N seconds idle (0 = never)"
+            default 60
+
+        config KNOB_LONG_PRESS_MS
+            int "Long press time (ms)"
+            default 600
+
+        config KNOB_ENCODER_COUNTS_PER_STEP
+            int "Encoder counts per click"
+            default 4
+            range 1 8
+            help
+                How many raw encoder counts make one "click" of the knob.
+                If one click moves two items, raise this; if you need two clicks per item, lower it.
+
+        config KNOB_ENCODER_REVERSE
+            bool "Reverse knob direction"
+            default n
+    endmenu
+
+    menu "Board pins (defaults match the CrowPanel 1.28 Rotary)"
+        config KNOB_PIN_LCD_SCLK
+            int "LCD SPI clock"
+            default 10
+        config KNOB_PIN_LCD_MOSI
+            int "LCD SPI data (MOSI)"
+            default 11
+        config KNOB_PIN_LCD_CS
+            int "LCD chip select"
+            default 9
+        config KNOB_PIN_LCD_DC
+            int "LCD data/command"
+            default 3
+        config KNOB_PIN_LCD_RST
+            int "LCD reset"
+            default 14
+        config KNOB_PIN_LCD_BL
+            int "LCD backlight"
+            default 46
+        config KNOB_LCD_MIRROR_X
+            bool "Mirror display horizontally (turn on if text appears backwards)"
+            default y
+        config KNOB_LCD_MIRROR_Y
+            bool "Mirror display vertically (turn on if the picture is upside down)"
+            default n
+
+        config KNOB_PIN_TP_SDA
+            int "Touch I2C SDA"
+            default 6
+        config KNOB_PIN_TP_SCL
+            int "Touch I2C SCL"
+            default 7
+        config KNOB_PIN_TP_INT
+            int "Touch interrupt"
+            default 5
+        config KNOB_PIN_TP_RST
+            int "Touch reset"
+            default 13
+        config KNOB_TP_MIRROR_X
+            bool "Mirror touch X"
+            default n
+        config KNOB_TP_MIRROR_Y
+            bool "Mirror touch Y"
+            default n
+
+        config KNOB_PIN_ENC_A
+            int "Encoder A"
+            default 45
+        config KNOB_PIN_ENC_B
+            int "Encoder B"
+            default 42
+        config KNOB_PIN_ENC_SW
+            int "Encoder push button"
+            default 41
+
+        config KNOB_PIN_LED
+            int "WS2812 LED ring data"
+            default 48
+        config KNOB_LED_COUNT
+            int "Number of LEDs"
+            default 5
+
+        config KNOB_PIN_PWR_1
+            int "Peripheral power enable 1 (driven high, -1 to skip)"
+            default 1
+        config KNOB_PIN_PWR_2
+            int "Peripheral power enable 2 (driven high, -1 to skip)"
+            default 2
+        config KNOB_PIN_PWR_LED
+            int "Power indicator LED (driven low = off, -1 to skip)"
+            default 40
+    endmenu
+
+endmenu

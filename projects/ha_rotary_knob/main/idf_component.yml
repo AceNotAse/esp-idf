@@ -1,0 +1,7 @@
+## Extra libraries pulled from the Espressif Component Registry on first build.
+dependencies:
+  lvgl/lvgl: "9.3.0"                         # graphics library that draws the round UI
+  espressif/esp_lcd_gc9a01: "^2.0.0"         # driver for the GC9A01 round 240x240 LCD
+  espressif/esp_lcd_touch_cst816s: "^1.0.0"  # driver for the CST816D touch chip (CST816S compatible)
+  espressif/led_strip: "^3.0.0"              # driver for the 5 WS2812 LEDs around the knob
+  espressif/cjson: "^1.7.19"                 # JSON parser for Home Assistant API replies

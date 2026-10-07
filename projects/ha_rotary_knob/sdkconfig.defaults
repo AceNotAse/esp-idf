@@ -1,0 +1,20 @@
+# Board: Elecrow CrowPanel 1.28" ESP32-S3 Rotary Display
+CONFIG_IDF_TARGET="esp32s3"
+
+# Board has 16MB flash; 4MB is the safe minimum and is enough for this app.
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# Run the CPU at full speed for smoother graphics
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+
+# Trust the standard public CA list (only used when your HA URL is https://)
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE=y
+
+# LVGL: fonts used by the UI, and keep LVGL's own memory pool in internal RAM
+CONFIG_LV_FONT_MONTSERRAT_14=y
+CONFIG_LV_FONT_MONTSERRAT_20=y
+CONFIG_LV_FONT_MONTSERRAT_28=y
+CONFIG_LV_FONT_MONTSERRAT_40=y
+CONFIG_LV_MEM_SIZE_KILOBYTES=64
